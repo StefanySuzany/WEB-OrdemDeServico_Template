@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ordem de Serviço</title>
+  <!-- & ESTILIZAÇÃO -->
+  <style>
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
+
+    @media print {
+      .titulo {
+        background-color: #4587eb !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .titulo2 {
+        background-color: #eb8245 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .os-info {
+        background-color: #ececec !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .solucao {
+        background-color: #ececec !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    .pagina {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      height: 100vh;
+    }
+
+    .via {
+      flex: 1;
+      border-right: 1px dashed #000;
+      padding: 2%;
+      width: 50%;
+      height: 100%;
+      box-sizing: border-box;
+    }
+
+    .via2 {
+      flex: 1;
+      padding: 2%;
+      width: 50%;
+      height: 100%;
+      box-sizing: border-box;
+    }
+
+    h1,
+    h2 {
+      font-size: 14px;
+    }
+
+    p {
+      font-size: 10px;
+    }
+
+    .imagem {
+      border-right: 1px solid #000000;
+      width: 10%;
+      padding: 2mm;
+    }
+
+    .logo {
+      width: 100%;
+    }
+
+    .cabecalho {
+      max-height: 30mm;
+      display: flex;
+      gap: 20px;
+      border: 1px solid #000000;
+    }
+
+    .cabecalho-info {
+      line-height: 3mm;
+    }
+
+    .cab-os-info {
+      display: row;
+      bottom: 2%;
+      right: 2%;
+    }
+
+    .os-info {
+      display: flex;
+      justify-content: center;
+      margin-top: 1mm;
+      border: 1px solid #000000;
+      background-color: #ececec;
+      padding: 1mm;
+    }
+
+    .dados-os{
+      display: flex;
+      line-height: 1mm;
+      gap: 1.5mm;
+      display: flex;
+      flex-direction: row;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 10px;
+      margin: 0;
+      padding: 0;
+      background: white;
+      color: #333;
+    }
+
+    .cliente-info {
+      margin-top: 3%;
+      position: relative;
+      border: 1px solid #000000;
+    }
+
+    .dados-cliente {
+      display: flex;
+      flex-direction: column;
+      line-height: 0mm;
+      margin-top: 2mm;
+      margin-left: 2mm;
+    }
+
+    .solicitacao {
+      position: relative;
+      text-align: justify;
+      margin-top: 3%;
+      padding: 2mm;
+      border: 1px solid #000000;
+    }
+
+    .caracteristicas {
+      display: flex;
+      gap: 3mm;
+    }
+
+    .solicitacao-descricao {
+      line-height: 2.5mm;
+      margin-top: 0;
+    }
+
+    .solucao {
+      position: relative;
+      height: 20mm;
+      margin-top: 3%;
+      padding: 1%;
+      border: 1px solid #000000;
+      background-color: #ececec;
+    }
+
+    .solucao-info {
+      margin-top: 2mm;
+    }
+
+    .produtos {
+      margin-top: 4%;
+      position: relative;
+    }
+
+    .total {
+      position: absolute;
+      margin-top: 3%;
+      right: 2%;
+      line-height: 1%;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid #707070;
+    }
+
+    th,
+    td {
+      padding: 8px;
+      text-align: left;
+    }
+
+    .titulo {
+      position: absolute;
+      color: white;
+      top: -3mm;
+      left: 2%;
+      background: #4587eb;
+      padding: 2px 8px;
+      font-weight: bold;
+      font-size: 12px;
+      border-radius: 1mm;
+    }
+
+    .titulo2 {
+      position: absolute;
+      color: white;
+      top: -3mm;
+      left: 2%;
+      background: #eb8245;
+      padding: 2px 8px;
+      font-weight: bold;
+      font-size: 12px;
+      border-radius: 1mm;
+    }
+
+    .termo {
+      margin-top: 3mm;
+    }
+
+    .termo-conteudo {
+      margin-top: 0mm;
+      line-height: 0mm;
+    }
+
+    .double-line {
+      line-height: 2mm;
+    }
+
+    .assinaturas {
+      width: 100%;
+      margin-top: 1mm;
+      display: flex;
+      justify-content: space-between;
+      /* Espaço entre colunas */
+      gap: 10mm;
+      /* Espaço entre elementos */
+    }
+
+    .container-assinatura {
+      width: 100%;
+    }
+
+    .linha-assinatura {
+      width: 100%;
+      border-bottom: 1px solid #000;
+      margin: 50px auto 5px auto;
+      /* margem acima e abaixo */
+    }
+
+    .label-assinatura {
+      text-align: center;
+      font-size: 10px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="pagina">
+    <div class="via">
+      <!-- ~ CABEÇALHO -->
+      <header>
+        <div class="cabecalho">
+          <div class="imagem">
+            <img src="/src/LogoPlaceHolder.png" alt="Logo da empresa" class="logo">
+          </div>
+          <div class="cabecalho-info">
+            <h1>NOME DA EMPRESA / COMPANY NAME</h1>
+            <p>NOME DA RUA / STREET NAME, NUMBER / NÚMERO - CIDADE / CITY</p>
+            <p>PHONE / TEL: (XX) 1234-5678 | Email: adress@email.com.br</p>
+          </div>
+          <div class="cab-os-info">
+            <h2>Ordem de Serviço / WORK ORDER</h2>
+            <h2><strong>Nº: ID-1234</strong></h2>
+          </div>
+        </div>
+      </header>
+
+      <!-- ~ DADOS OS -->
+      <section class="os-info">
+        <div class="dados-os">
+          <p><strong>Nº:</strong> ID-1234</p>
+          <p><strong>Emissão:</strong> 12/05/2025 - 10:12</p>
+        <p><strong>Início:</strong> 12/05/2025 - 10:11</p>
+        <p><strong>Término:</strong> --</p>
+        </div>
+      </section>
+
+      <!-- ~ DADOS CLIENTE -->
+      <section class="cliente-info">
+        <span class="titulo">Dados do Cliente</span>
+        <div class="dados-cliente">
+          <p><strong>Razão Social:</strong> CLIENT NAME / NOME DO CLIENTE</p>
+          <p><strong>CNPJ:</strong> 99.999.999/0001-91 <strong>Insc. Estadual:</strong> 123456789</p>
+          <p><strong>Endereço:</strong>NOME DA RUA / STREET NAME, NUMBER / NÚMERO - CIDADE / CITY</p>
+          <p><strong>CEP:</strong> 12345-678</p>
+          <div class="endereco-cliente">
+          </div>
+          <div class="contato-cliente">
+            <p><strong>Contato:</strong> adress@email.com.br / (XX) 1234-5678</p>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ~ DETALHES OS -->
+      <section class="solicitacao">
+        <div class="caracteristicas">
+          <span class="titulo">Solicitação</span>
+          <p><strong>Categoria:</strong> TELEFONE</p>
+          <p><strong>Tipo:</strong> CLIENTE </p>
+          <p><strong>Serviço:</strong> GARANTIA </p>
+          <p><strong>Manutenção:</strong> SOFTWARE
+          </p>
+        </div>
+        <div class="solicitacao-descricao">
+          <p><strong>Descrição:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nulla dolore
+            totam quasi tempora tenetur voluptas ad, id distinctio voluptatum voluptate repellat sint fugiat aliquid
+            ducimus. Beatae, iste saepe! Velit! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat nam
+            ducimus</p>
+        </div>
+      </section>
+
+      <section class="solucao">
+        <span class="titulo2">Solução</span>
+        <div class="solucao-info">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, libero assumenda aliquam, fugit officiis
+          adipisci non beatae at aspernatur consectetur dolores dolor! Libero, quis? Rem voluptatum quia sint nemo ea.
+        </div>
+      </section>
+
+      <!-- ~ PRODUTOS E SERVIÇOS -->
+      <section class="produtos">
+        <span class="titulo">Produtos e Serviços</span>
+        <table>
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Descrição</th>
+              <th>Qtde</th>
+              <th>Preço Unit.</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>002001</td>
+              <td>ATEND. FON/NET</td>
+              <td>0,00</td>
+              <td>0,00</td>
+              <td>0,00</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="total"><strong>Total Geral:</strong> R$ 0,00</p>
+      </section> 
+
+      <!-- ~ TERMO DE RESPONSABILIDADE -->
+      <section class="termo">
+        <h2>Termo de Responsabilidade</h2>
+        <div class="termo-conteudo">
+          <div>
+            <p>- A cópia de reserva dos dados (backup) é de total responsabilidade do cliente.</p>
+          </div>
+          <div class="double-line">- Equipamentos não removidos após 15 dias terão taxa de R$ 5,00 por dia. Após 45
+            dias, poderão ser
+            incorporados ao patrimônio da EMPRESA.</p>
+          </div>
+          <div>
+            <p>- O cliente declara a procedência legítima do equipamento.</p>
+          </div>
+          <div>
+            <p>- A EMPRESA tem até 48h para finalizar o orçamento e contatar o cliente.</p>
+          </div>
+          <div>
+            <p>- Caso não aprovado, o equipamento será devolvido em até 24h nas mesmas condições.</p>
+          </div>
+          <div>
+            <p>- Se aprovado, o prazo máximo de entrega é de 72h, exceto por indisponibilidade de peças ou drivers.</p>
+          </div>
+          <div>
+            <p>- Garantia: 90 dias para peças e 30 dias para serviços.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ~ ASSINATURAS -->
+      <section class="assinaturas">
+        <div class="container-assinatura">
+          <div class="linha-assinatura"></div>
+          <p class="label-assinatura"><strong>Assinatura da Empresa</strong></p>
+        </div>
+
+        <div class="container-assinatura">
+          <div class="linha-assinatura"></div>
+          <p class="label-assinatura"><strong>Assinatura do Cliente</strong></p>
+        </div>
+      </section>
+    </div>
+
+    <!-- & SEGUNDA VIA -->
+    <div class="via2">
+      <!-- ~ CABEÇALHO -->
+      <header>
+        <div class="cabecalho">
+          <div class="imagem">
+            <img src="/src/LogoPlaceHolder.png" alt="Logo da empresa" class="logo">
+          </div>
+          <div class="cabecalho-info">
+            <h1>NOME DA EMPRESA / COMPANY NAME</h1>
+            <p>NOME DA RUA / STREET NAME, NUMBER / NÚMERO - CIDADE / CITY</p>
+            <p>PHONE / TEL: (XX) 1234-5678 | Email: adress@email.com.br</p>
+          </div>
+          <div class="cab-os-info">
+            <h2>Ordem de Serviço / WORK ORDER</h2>
+            <h2><strong>Nº: ID-1234</strong></h2>
+          </div>
+        </div>
+      </header>
+
+      <!-- ~ DADOS OS -->
+      <section class="os-info">
+        <div class="dados-os">
+          <p><strong>Nº:</strong> ID-1234</p>
+          <p><strong>Emissão:</strong> 12/05/2025 - 10:12</p>
+        <p><strong>Início:</strong> 12/05/2025 - 10:11</p>
+        <p><strong>Término:</strong> --</p>
+        </div>
+      </section>
+
+      <!-- ~ DADOS CLIENTE -->
+      <section class="cliente-info">
+        <span class="titulo">Dados do Cliente</span>
+        <div class="dados-cliente">
+          <p><strong>Razão Social:</strong> CLIENT NAME / NOME DO CLIENTE</p>
+          <p><strong>CNPJ:</strong> 99.999.999/0001-91 <strong>Insc. Estadual:</strong> 123456789</p>
+          <p><strong>Endereço:</strong>NOME DA RUA / STREET NAME, NUMBER / NÚMERO - CIDADE / CITY</p>
+          <p><strong>CEP:</strong> 12345-678</p>
+          <div class="endereco-cliente">
+          </div>
+          <div class="contato-cliente">
+            <p><strong>Contato:</strong> adress@email.com.br / (XX) 1234-5678</p>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ~ DETALHES OS -->
+      <section class="solicitacao">
+        <div class="caracteristicas">
+          <span class="titulo">Solicitação</span>
+          <p><strong>Categoria:</strong> TELEFONE</p>
+          <p><strong>Tipo:</strong> CLIENTE </p>
+          <p><strong>Serviço:</strong> GARANTIA </p>
+          <p><strong>Manutenção:</strong> SOFTWARE
+          </p>
+        </div>
+        <div class="solicitacao-descricao">
+          <p><strong>Descrição:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nulla dolore
+            totam quasi tempora tenetur voluptas ad, id distinctio voluptatum voluptate repellat sint fugiat aliquid
+            ducimus. Beatae, iste saepe! Velit! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat nam
+            ducimus</p>
+        </div>
+      </section>
+
+      <section class="solucao">
+        <span class="titulo2">Solução</span>
+        <div class="solucao-info">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, libero assumenda aliquam, fugit officiis
+          adipisci non beatae at aspernatur consectetur dolores dolor! Libero, quis? Rem voluptatum quia sint nemo ea.
+        </div>
+      </section>
+
+       <!-- ~ PRODUTOS E SERVIÇOS -->
+      <section class="produtos">
+        <span class="titulo">Produtos e Serviços</span>
+        <table>
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Descrição</th>
+              <th>Qtde</th>
+              <th>Preço Unit.</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>002001</td>
+              <td>ATEND. FON/NET</td>
+              <td>0,00</td>
+              <td>0,00</td>
+              <td>0,00</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="total"><strong>Total Geral:</strong> R$ 0,00</p>
+      </section>
+
+      <!-- ~ TERMO DE RESPONSABILIDADE -->
+      <section class="termo">
+        <h2>Termo de Responsabilidade</h2>
+        <div class="termo-conteudo">
+          <div>
+            <p>- A cópia de reserva dos dados (backup) é de total responsabilidade do cliente.</p>
+          </div>
+          <div class="double-line">- Equipamentos não removidos após 15 dias terão taxa de R$ 5,00 por dia. Após 45
+            dias, poderão ser
+            incorporados ao patrimônio da EMPRESA.</p>
+          </div>
+          <div>
+            <p>- O cliente declara a procedência legítima do equipamento.</p>
+          </div>
+          <div>
+            <p>- A EMPRESA tem até 48h para finalizar o orçamento e contatar o cliente.</p>
+          </div>
+          <div>
+            <p>- Caso não aprovado, o equipamento será devolvido em até 24h nas mesmas condições.</p>
+          </div>
+          <div>
+            <p>- Se aprovado, o prazo máximo de entrega é de 72h, exceto por indisponibilidade de peças ou drivers.</p>
+          </div>
+          <div>
+            <p>- Garantia: 90 dias para peças e 30 dias para serviços.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ~ ASSINATURAS -->
+      <section class="assinaturas">
+        <div class="container-assinatura">
+          <div class="linha-assinatura"></div>
+          <p class="label-assinatura"><strong>Assinatura da Empresa</strong></p>
+        </div>
+
+        <div class="container-assinatura">
+          <div class="linha-assinatura"></div>
+          <p class="label-assinatura"><strong>Assinatura do Cliente</strong></p>
+        </div>
+      </section>
+    </div>
+    </div>
+</body>
+
+</html>
